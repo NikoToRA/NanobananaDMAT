@@ -86,9 +86,17 @@ npm start
 
 #### Webデプロイする場合（推奨）
 
-**より簡単な方法：WebにデプロイしてURLを共有**
+**GitHubリポジトリからVercelにデプロイ（5分で完了）**
 
-詳細な手順は [`DEPLOYMENT.md`](./DEPLOYMENT.md) を参照してください。
+📦 **GitHubリポジトリ**: https://github.com/NikoToRA/NanobananaDMAT
+
+**詳細な手順は [`VERCEL_DEPLOY.md`](./VERCEL_DEPLOY.md) を参照してください。**
+
+簡単な流れ：
+1. [Vercel](https://vercel.com)にGitHubアカウントでログイン
+2. 「Add New...」→ 「Project」→ GitHubリポジトリを選択
+3. 環境変数を設定（GEMINI_API_KEY または REPLICATE_API_TOKEN）
+4. デプロイ完了！URLが表示されます
 
 - Vercel（無料・簡単）: 5分でデプロイ完了
 - 参加者にURLを共有するだけ
