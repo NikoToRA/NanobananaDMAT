@@ -31,6 +31,25 @@ if (!process.env.GEMINI_API_KEY) {
 
 const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
 
+// 利用可能なモデル一覧を取得する関数
+async function listAvailableModels() {
+    if (!genAI) return null;
+    try {
+        const models = await genAI.listModels();
+        console.log('📋 利用可能なモデル一覧:');
+        models.forEach(model => {
+            console.log(`  - ${model.name}`);
+        });
+        return models;
+    } catch (error) {
+        console.error('モデル一覧取得エラー:', error.message);
+        return null;
+    }
+}
+
+// 使用するモデル名（環境変数で変更可能）
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.0-nanobanana-pro' || 'gemini-1.5-flash';
+
 // テキストから画像生成
 app.post('/api/generate', async (req, res) => {
   try {
@@ -50,10 +69,14 @@ app.post('/api/generate', async (req, res) => {
     }
 
     console.log('🤖 Gemini API呼び出し開始...');
-    // Gemini 1.5 Flash を使用（画像生成は直接サポートされていませんが、まず試します）
-    // 注意: Gemini APIは画像生成よりも画像理解に特化しています
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    console.log('📋 使用モデル: gemini-1.5-flash');
+    // モデル名を試行: gemini-3.0-nanobanana-pro または デフォルト
+    const modelName = GEMINI_MODEL;
+    console.log('📋 使用モデル:', modelName);
+    
+    // まず利用可能なモデル一覧を確認（デバッグ用）
+    await listAvailableModels();
+    
+    const model = genAI.getGenerativeModel({ model: modelName });
     
     // 画像生成リクエスト
     const result = await model.generateContent({
