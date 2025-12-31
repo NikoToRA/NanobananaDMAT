@@ -50,8 +50,10 @@ app.post('/api/generate', async (req, res) => {
     }
 
     console.log('🤖 Gemini API呼び出し開始...');
-    // Gemini 2.0 Flash Exp（画像生成対応モデル）を使用
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    // Gemini 1.5 Flash を使用（画像生成は直接サポートされていませんが、まず試します）
+    // 注意: Gemini APIは画像生成よりも画像理解に特化しています
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    console.log('📋 使用モデル: gemini-1.5-flash');
     
     // 画像生成リクエスト
     const result = await model.generateContent({
