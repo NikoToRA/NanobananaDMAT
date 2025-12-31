@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     if (!dropZone || !fileInput) return;
 
+    // 重要: ブラウザ既定のファイルオープン動作を抑止しないと drop が効かない環境がある
+    window.addEventListener('dragover', (e) => e.preventDefault(), { passive: false });
+    window.addEventListener('drop', (e) => e.preventDefault(), { passive: false });
+
     // クリックでファイル選択
     dropZone.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', handleFileSelect);
@@ -20,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleDragOver(event) {
     event.preventDefault();
     event.stopPropagation();
+    if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy';
     document.getElementById('drop-zone').classList.add('drag-over');
 }
 
