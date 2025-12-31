@@ -67,23 +67,19 @@
                         <div 
                             id="drop-zone" 
                             class="drop-zone"
-                            ondrop="handleDrop(event)"
-                            ondragover="handleDragOver(event)"
-                            ondragleave="handleDragLeave(event)"
                         >
                             <div class="drop-zone-content">
                                 <div class="drop-icon">📎</div>
                                 <p class="drop-text">画像をドラッグ&ドロップ</p>
                                 <p class="drop-subtext">またはクリックしてファイルを選択</p>
-                                <input 
-                                    type="file" 
-                                    id="file-input" 
-                                    accept="image/*" 
-                                    class="file-input"
-                                    onchange="handleFileSelect(event)"
-                                >
                             </div>
                         </div>
+                        <input 
+                            type="file" 
+                            id="file-input" 
+                            accept="image/*" 
+                            class="file-input"
+                        >
 
                         <!-- プレビュー -->
                         <div id="image-preview" class="image-preview" style="display: none;">
