@@ -145,9 +145,6 @@ app.post('/api/generate-from-image', upload.single('image'), async (req, res) =>
   }
 });
 
-// 静的ファイルの配信
-app.use(express.static(path.join(__dirname, 'public')));
-
 // ルートパス（デプロイ用）
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
