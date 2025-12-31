@@ -12,7 +12,10 @@ const PORT = process.env.PORT || 3000;
 // ミドルウェア
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1d',
+  etag: true
+}));
 
 // Multer設定（メモリストレージ）
 const upload = multer({
