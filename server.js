@@ -48,7 +48,8 @@ async function listAvailableModels() {
 }
 
 // 使用するモデル名（環境変数で変更可能）
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.0-nanobanana-pro' || 'gemini-1.5-flash';
+// Gemini 3.0 NanobananaPro を優先、なければデフォルト
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.0-nanobanana-pro';
 
 // テキストから画像生成
 app.post('/api/generate', async (req, res) => {
@@ -177,7 +178,10 @@ app.post('/api/generate-from-image', upload.single('image'), async (req, res) =>
     const mimeType = imageFile.mimetype;
 
     console.log('🤖 Gemini API呼び出し開始（画像+テキスト）...');
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const modelName = GEMINI_MODEL;
+    console.log('📋 使用モデル:', modelName);
+    
+    const model = genAI.getGenerativeModel({ model: modelName });
     
     const result = await model.generateContent({
       contents: [{
