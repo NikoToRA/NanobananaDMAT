@@ -35,7 +35,7 @@ const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GE
 app.post('/api/generate', async (req, res) => {
   try {
     if (!genAI) {
-      return res.status(500).json({ error: 'APIキーが設定されていません。.envファイルにGEMINI_API_KEYを設定してください。' });
+      return res.status(500).json({ error: 'APIキーが設定されていません。Vercelの環境変数にGEMINI_API_KEYを設定してください。' });
     }
 
     const { prompt } = req.body;
@@ -84,7 +84,7 @@ app.post('/api/generate', async (req, res) => {
 app.post('/api/generate-from-image', upload.single('image'), async (req, res) => {
   try {
     if (!genAI) {
-      return res.status(500).json({ error: 'APIキーが設定されていません。.envファイルにGEMINI_API_KEYを設定してください。' });
+      return res.status(500).json({ error: 'APIキーが設定されていません。Vercelの環境変数にGEMINI_API_KEYを設定してください。' });
     }
 
     const { prompt } = req.body;
